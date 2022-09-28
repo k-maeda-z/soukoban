@@ -4,26 +4,26 @@
 Player::Player() {
 	std::cout << "Create Player\n";
 	direct = EventAdapter::EVENT_DOWN;
-	// “Ç‚İ‚İƒtƒ@ƒCƒ‹
+	// ï¿½Ç‚İï¿½ï¿½İƒtï¿½@ï¿½Cï¿½ï¿½
 	file = new Mat;
 	*file = imread(CHARACTER_FILE_PATH, -1);
-	// ƒLƒƒƒ‰ƒNƒ^[ƒCƒ[ƒW
+	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½^ï¿½[ï¿½Cï¿½ï¿½ï¿½[ï¿½W
 	setImageFile();
 }
 
 Player::Player(CharacterManager* characterManager) {
 	std::cout << "Create Player (CharacterManager*)\n";
 	m_characterManager = characterManager;
-	// ˆÚ“®—Ê
+	// ï¿½Ú“ï¿½ï¿½ï¿½
 	step = 4;
 	direct = EventAdapter::EVENT_DOWN;
 	count = 0;
-	// “Ç‚İ‚İƒtƒ@ƒCƒ‹
+	// ï¿½Ç‚İï¿½ï¿½İƒtï¿½@ï¿½Cï¿½ï¿½
 	file = new Mat;
 	*file = imread(CHARACTER_FILE_PATH, -1);
-	// ƒLƒƒƒ‰ƒNƒ^[ƒCƒ[ƒW
+	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½^ï¿½[ï¿½Cï¿½ï¿½ï¿½[ï¿½W
 	setImageFile();
-	// ƒRƒ“ƒgƒ[ƒ‰İ’è
+	// ï¿½Rï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½İ’ï¿½
 	m_controlar = new Controlar(this);
 	std::thread th_a(*m_controlar);
 	th_a.detach();
@@ -47,11 +47,11 @@ void Player::drawCharacter() {
 }
 
 void Player::clearCharacter() {
-	// ƒŠƒXƒg—v‘f‘SÁ‹
+	// ï¿½ï¿½ï¿½Xï¿½gï¿½vï¿½fï¿½Sï¿½ï¿½ï¿½ï¿½
 	lposition.clear();
 	direct = EventAdapter::EVENT_DOWN;
 	count = 0;
-	// ‰Šúƒpƒ^[ƒ“İ’è
+	// ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½^ï¿½[ï¿½ï¿½ï¿½İ’ï¿½
 	setImageFile();
 }
 
@@ -68,10 +68,10 @@ void Player::drawCharacterPosition(int offX, int offY) {
 
 void Player::setImageFile() {
 
-	// ƒLƒƒƒ‰ƒNƒ^ƒpƒ^[ƒ“Œˆ’è•Ï”
+	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½^ï¿½pï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïï¿½
 	int offX = (count / PATTERN_SPEED);
 
-	// •ûŒüƒLƒƒƒ‰Œˆ’è•Ï”
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïï¿½
 	int offY = 0;
 
 	if (direct == EventAdapter::EVENT_DOWN) {
@@ -96,9 +96,9 @@ int Player::ReceiveEvent(int event) {
 	}
 
 	direct = event;
-	// •\¦ƒLƒƒƒ‰ƒNƒ^[XV
+	// ï¿½\ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½^ï¿½[ï¿½Xï¿½V
 	setImageFile();
-	// ˆÊ’uXV
+	// ï¿½Ê’uï¿½Xï¿½V
 	movePoint = move(event, step);
 
 	if (count == ((PATTERN_MAX * PATTERN_SPEED) - 1)) {
@@ -119,7 +119,7 @@ int Player::move(int direct, int step) {
 		return 0;
 	}
 
-	// ˆÚ“®—ÊZo
+	// ï¿½Ú“ï¿½ï¿½ÊZï¿½oXXX
 	fStep = m_characterManager->getMoveResultPoint(direct, step);
 
 	switch (direct) {
@@ -152,16 +152,16 @@ void Player::overlayChar(Mat* src, Mat* dst) {
     cv::Vec4b dst_bgra = NULL;
 
     for (int y = 0; y < src->rows; y++) {
-        // ƒ|ƒCƒ“ƒ^‚Ìæ“¾
+        // ï¿½|ï¿½Cï¿½ï¿½ï¿½^ï¿½Ìæ“¾
         src_ptr = src->ptr<cv::Vec4b>(y);
         dst_ptr = dst->ptr<cv::Vec4b>(y);
         for (int x = 0; x < src->cols; x++) {
-            // ’l‚Ìæ“¾
+            // ï¿½lï¿½Ìæ“¾
             src_bgra = src_ptr[x];
             dst_bgra = dst_ptr[x];
-            // “§‰ß—¦100%‚Ídst‚Ìƒf[ƒ^‚ÍXV‚µ‚È‚¢
+            // ï¿½ï¿½ï¿½ß—ï¿½100%ï¿½ï¿½ï¿½ï¿½dstï¿½Ìƒfï¿½[ï¿½^ï¿½ÍXï¿½Vï¿½ï¿½ï¿½È‚ï¿½
             if (src_bgra[3] != 0) {
-                // dst ‚Ìalpha ‚ÍXV‚µ‚È‚¢
+                // dst ï¿½ï¿½alpha ï¿½ÍXï¿½Vï¿½ï¿½ï¿½È‚ï¿½
                 dst_ptr[x] = cv::Vec4b(src_bgra[0], src_bgra[1], src_bgra[2], dst_bgra[3]);
             }
         }
